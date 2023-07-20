@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class RoomPlacer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Vector3 playerChangePos;
+    private Camera cam;
+
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player")){
+            other.transform.position += playerChangePos;
+        }
     }
 }
+

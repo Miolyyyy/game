@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     public float speed;
     public int health;
+    public float rotation_speed;
 
     void Start()
     {
@@ -24,12 +25,15 @@ public class Enemy : MonoBehaviour
         float direction = player.transform.position.x - transform.position.x;
         float direction1 = player.transform.position.z - transform.position.z;
 
-        if (Mathf.Abs(direction) < 20)
+        if (Mathf.Abs(direction) < 7)
         {
             Vector3 pos = transform.position;
             pos.x += Mathf.Sign(direction) * speed * Time.deltaTime;
             pos.z += Mathf.Sign(direction1) * speed * Time.deltaTime;
             transform.position = pos;
+
+            var look_dir = player.transform.position - transform.position;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look_dir), rotation_speed * Time.deltaTime);
         }
     }
 
