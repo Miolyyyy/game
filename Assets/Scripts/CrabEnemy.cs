@@ -12,6 +12,7 @@ public class CrabEnemy : MonoBehaviour
     public float move_speed;
     public float rotation_speed;
     public Transform enemy;
+    public int damageEnemy;
 
     private AddRoom room;
 
@@ -19,6 +20,17 @@ public class CrabEnemy : MonoBehaviour
     void Start()
     {
         room = GetComponentInParent<AddRoom>();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) // Проверяем столкновение с игроком
+        {
+            Player playerHealth = other.GetComponent<Player>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamagePlayer(damageEnemy); // Наносим урон игроку
+            }
+        }
     }
 
     void Update()

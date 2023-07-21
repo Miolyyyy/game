@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public int health;
     public float rotation_speed;
+    public int damageEnemy=1;
 
     private AddRoom room;
 
@@ -16,6 +17,18 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         room = GetComponentInParent<AddRoom>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) // Проверяем столкновение с игроком
+        {
+            Player playerHealth = other.GetComponent<Player>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamagePlayer(damageEnemy); // Наносим урон игроку
+            }
+        }
     }
 
     private void Update()

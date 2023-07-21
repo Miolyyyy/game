@@ -1,24 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
 
-    public int health;
-    public int record;
+    public int playerHealth;
+    public int score;
+    public static bool gameOver;
+    public TextMeshProUGUI playerHealthText;
+    public TextMeshProUGUI playerScoreText;
+    public GameObject imageGameOver;
+    public GameObject imageRedScreen;
+    public float lifetime = 3;
 
     void Start()
     {
-
+        gameOver = false;
+        playerHealth = 5;
+        score = 0;
     }
 
     void Update()
     {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        playerHealthText.text = "" + playerHealth;
+
+        if (gameOver == true)
+            {
+                imageGameOver.SetActive(true);
+
+                SceneManager.LoadScene("Menu");
+            }
     }
 
     //void OnTriggerStay(Collider telo)
@@ -30,6 +44,13 @@ public class Player : MonoBehaviour
     //    }
     public void TakeDamagePlayer(int damageEnemy)
     {
-        health -= damageEnemy;
+        playerHealth -= damageEnemy;
+
+        if (playerHealth <= 0)
+        {
+            gameOver = true;
+
+        }
     }
+
 }

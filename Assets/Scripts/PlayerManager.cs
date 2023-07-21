@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        playerHealth = 0;
+        playerHealth = 3;
         gameOver = false;
     }
 
@@ -25,11 +25,12 @@ public class PlayerManager : MonoBehaviour
         playerHealthText.text = "" + playerHealth;
 
         
+        
     }
 
-    public IEnumerator Damage (int damageCount)
+    public IEnumerator Damage (int damageEnemy)
     {
-        playerHealth -= damageCount;
+        playerHealth -= damageEnemy;
         imageRedScreen.SetActive(true);
 
         if (playerHealth <= 0)
