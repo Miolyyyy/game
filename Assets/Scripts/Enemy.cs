@@ -10,9 +10,12 @@ public class Enemy : MonoBehaviour
     public int health;
     public float rotation_speed;
 
+    private AddRoom room;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        room = GetComponentInParent<AddRoom>();
     }
 
     private void Update()
@@ -20,6 +23,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            room.enemies.Remove(gameObject);
         }
 
         float direction = player.transform.position.x - transform.position.x;

@@ -24,7 +24,7 @@ public class SpawnerRooms : MonoBehaviour
     {
         variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomsVariants>();
         Destroy(gameObject, waitTime);
-        Invoke("Spawn", 0.2f);
+        Invoke("Spawn", 0.3f);
     }
 
     public void Spawn()
@@ -36,7 +36,7 @@ public class SpawnerRooms : MonoBehaviour
                 rand = Random.Range(0, variants.topRooms.Length);
                 Instantiate(variants.topRooms[rand], transform.position, variants.topRooms[rand].transform.rotation);
             }
-           else if (direction == Direction.Bot)
+            else if (direction == Direction.Bot)
             {
                 rand = Random.Range(0, variants.botRooms.Length);
                 Instantiate(variants.botRooms[rand], transform.position, variants.botRooms[rand].transform.rotation);
